@@ -1,0 +1,10 @@
+target/
+*.class
+*.log
+test-output/
+selionFiles/
+.settings/
+.project
+.classpath
+.DS_Store
+

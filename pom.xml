@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ziroom.test</groupId>
+  <artifactId>ZiroomDemo</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>ZiroomDemo</name>
+  <url>http://maven.apache.org</url>
+
+  <!-- you need this to pull SeLion SNAPSHOT artifacts from the global repo -->
+  <repositories>
+    <repository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+  </repositories>
+
+  <!-- you need this to pull SeLion SNAPSHOT plugin artifacts from the global repo -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <layout>default</layout>
+    <snapshots>
+      <!-- Flipping this to true would let you work with SNAPSHOT versions of
+        plugins -->
+      <enabled>true</enabled>
+    </snapshots>
+    <releases>
+      <updatePolicy>never</updatePolicy>
+    </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.paypal.selion</groupId>
+      <artifactId>SeLion</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.17</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+  <groupId>com.paypal.selion</groupId>
+  <artifactId>SeLion-Code-Generator</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <executions>
+    <execution>
+      <phase>generate-sources</phase>
+      <goals>
+        <goal>generate</goal>
+      </goals>
+    </execution>
+  </executions>
+  <configuration>
+    <basePackage>com.ziroom.test</basePackage>
+  </configuration>
+</plugin>
+
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>build-helper-maven-plugin</artifactId>
+  <version>1.5</version>
+  <executions>
+    <execution>
+      <id>add-source</id>
+      <phase>generate-sources</phase>
+      <goals>
+        <goal>add-source</goal>
+      </goals>
+      <configuration>
+        <sources>
+          <source>${project.build.directory}/generated-sources</source>
+        </sources>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+
+    </plugins>
+    
+    <pluginManagement>
+  <plugins>
+  
+  
+    <!--This plugin's configuration is used to store Eclipse m2e settings only.
+      It has no influence on the Maven build itself. -->
+    <plugin>
+      <groupId>org.eclipse.m2e</groupId>
+      <artifactId>lifecycle-mapping</artifactId>
+      <version>1.0.0</version>
+      <configuration>
+        <lifecycleMappingMetadata>
+          <pluginExecutions>
+            <pluginExecution>
+              <pluginExecutionFilter>
+                <groupId>com.paypal.selion</groupId>
+                <artifactId>SeLion-Code-Generator</artifactId>
+                <versionRange>
+                [1.0.0-SNAPSHOT,)
+                </versionRange>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+              </pluginExecutionFilter>
+              <action>
+                <execute>
+                  <runOnIncremental>false</runOnIncremental>
+                </execute>
+              </action>
+            </pluginExecution>
+          </pluginExecutions>
+        </lifecycleMappingMetadata>
+      </configuration>
+    </plugin>
+  </plugins>
+</pluginManagement>
+
+  </build>
+  
+</project>

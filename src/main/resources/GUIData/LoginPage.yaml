@@ -1,0 +1,25 @@
+baseClass: "com.paypal.selion.testcomponents.BasicPageImpl"
+pageTitle:
+  CN: "Ziroom Login Page"
+elements:
+  loginTextField:
+    locators:
+      CN: "css=#zhanghao"
+  passwordTextField:
+    locators:
+      CN: "css=#user_password"
+  captchaTextField:
+    locators:
+      CN: "css=#captcha"    
+  loginButton:
+    locators:
+      CN: "css=#login_button"
+  loginloadButton:
+    locators:
+      CN: "css=.login_btn_load"
+pageValidators: [
+  loginTextField,
+  passwordTextField,
+  loginButton
+  ]
+defaultLocale: "CN"

@@ -1,0 +1,35 @@
+baseClass: "com.paypal.selion.testcomponents.BasicPageImpl"
+pageTitle:
+  CN: "Contract Page"
+elements:  
+  contactHeaderContainer:
+    locators:
+      CN: "css=#common-tabslist li"
+    containerElements:
+      contractLink:
+        locators:
+          CN: "css=a"
+  contractNumberLabel:
+    locators:
+      CN: "css=.t_hetong_detail > span" 
+  propertyLabel:
+    locators:
+      CN: "css=.t_hetong_detail > p:nth-child(3)"
+  paymentContainer:
+    locators:
+      CN: "css=.t_hetong_detail > p:nth-child(4)"
+    containerElements:
+      rentMoneyLabel:
+        locators:
+          CN: "css=span:nth-child(1)> span"     
+      paymentMethodLabel:
+        locators:
+          CN: "css=span:nth-child(2) > span"    
+      moneytoPayLabel:
+        locators:
+          CN: "css=span:nth-child(3) > span"                               
+pageValidators: [
+ contractNumberLabel,
+ propertyLabel
+  ]
+defaultLocale: "CN"

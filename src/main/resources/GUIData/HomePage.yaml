@@ -1,0 +1,15 @@
+baseClass: "com.paypal.selion.testcomponents.BasicPageImpl"
+pageTitle:
+  CN: "Ziroom Home Page"
+elements:
+  loginLink:
+    locators:
+      CN: "css=.fr > li:nth-child(3) a"
+  signupLink:
+    locators:
+      CN: "css=a[href$='action=register']"      
+pageValidators: [
+  loginLink,
+  signupLink.isVisible
+  ]
+defaultLocale: "CN"
