@@ -33,9 +33,10 @@ public class LoginPageExt extends LoginPage {
 		return this;
 	}
 	
-	public IZiroomPage Login() {
+	public IZiroomPage Login() throws InterruptedException {
 		IZiroomPage iZiroomPage = new IZiroomPage();
 		clickLoginButton();
+		Thread.sleep(1000);
 		Grid.driver().get(ZiroomConfig.IZIROOM);
 		WebDriverWaitUtils.waitUntilElementIsVisible(iZiroomPage.getMycontractLink().getLocator());
 		SeLionReporter.log(Grid.driver().getTitle(), true,true);
