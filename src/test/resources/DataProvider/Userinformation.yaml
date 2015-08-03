@@ -1,0 +1,9 @@
+- !!com.ziroom.dataobject.Userinformation
+    userphone: 13581530722 
+    password : 201314
+- !!com.ziroom.dataobject.Userinformation
+    userphone : 18600803802
+    password : 201314
+- !!com.ziroom.dataobject.Userinformation
+    userphone : 13161767136
+    password : 13161767136

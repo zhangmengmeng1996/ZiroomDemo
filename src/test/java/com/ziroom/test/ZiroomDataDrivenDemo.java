@@ -1,26 +1,36 @@
 package com.ziroom.test;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.paypal.selion.annotations.WebTest;
+import com.paypal.selion.platform.dataprovider.DataResource;
+import com.paypal.selion.platform.dataprovider.impl.FileSystemResource;
+import com.paypal.selion.platform.dataprovider.impl.YamlDataProviderImpl;
 import com.paypal.selion.platform.grid.Grid;
 import com.paypal.selion.reports.runtime.SeLionReporter;
+import com.ziroom.dataobject.Userinformation;
 import com.ziroom.test.user.LoginPageExt;
 
-public class ZiroomDemo {
+public class ZiroomDataDrivenDemo {
 	
-	//初始化页面
-	HomePage homePage= new HomePage();
-	LoginPageExt loginPage = new LoginPageExt();
-	IZiroomPage iZiroomPage = new IZiroomPage();
-	ContractPage contractPage = new ContractPage();
+	@DataProvider(parallel=true, name="multiplelogin")
+	public Object[][] simpleDataProvider() throws Exception {
+		DataResource dataResource = new FileSystemResource("src/test/resources/DataProvider/Userinformation.yaml");
+		YamlDataProviderImpl yamlDataProvider = new YamlDataProviderImpl(dataResource);
+		return yamlDataProvider.getAllData();
+	}
+
 	
-	public	String userphone = "13581530722";
-	public	String password = "201314";
-	
-	@Test
 	@WebTest
-	public void ZiroomDemoTest() throws InterruptedException{
+	@Test(dataProvider = "multiplelogin")
+	public void ZiroomDataDrivenTest(Userinformation userinformation) throws InterruptedException{
+		
+		//初始化页面
+		HomePage homePage= new HomePage();
+		LoginPageExt loginPage = new LoginPageExt();
+		IZiroomPage iZiroomPage = new IZiroomPage();
+		ContractPage contractPage = new ContractPage();
 		
 		//打开ziroom主页
 		Grid.driver().get("http://www.ziroom.com");
@@ -32,7 +42,7 @@ public class ZiroomDemo {
             //System.out.println("+++" + winHandle);  
             Grid.driver().switchTo().window(winHandle);  
             } 
-		loginPage.fillLoginPage(userphone,password);
+		loginPage.fillLoginPage(userinformation.getUserphone(),userinformation.getPassword());
 		loginPage.Login();
 		
 		//打开我的合同页面
