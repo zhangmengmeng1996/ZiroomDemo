@@ -7,4 +7,5 @@ selionFiles/
 .project
 .classpath
 .DS_Store
-
+ZiroomDemo.iml
+.idea
